@@ -1,0 +1,58 @@
+https://timmousk.com/blog/git-rm-cached/
+
+Most developers love Git because it provides easy commands to version control the source code of a project. One of the commands offered by Git is the git rm command used to remove files. Although this command is simple, it comes with a cached option which many don't understand.
+
+The git rm --cached command removes a file from the index BUT keeps it in the working directory.
+
+This article will explain the git rm --cached command and show different examples of how to use it.
+
+Let's get to it 😎.
+git rm cached
+The definition
+
+The git rm --cached command removes a file from the Git index AND keeps it in the working area.
+
+To complete the file removal, you need to commit the change and push it to a remote.
+
+You can also delete a directory using the recursive option, like so:
+
+git rm -r --cached directory_name/
+
+Example
+
+Let's say you have a Git repository with a committed file called index2.js that you wish to remove from the index and keep in your working area.
+
+1. Remove the file.
+
+git rm --cached index2.js
+
+2. Use the git status command to check the changes.
+
+> git status
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        deleted:    index2.js
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        index2.js
+
+As you can see, the file called index2.js is removed from the Git index but still exists in the working area.
+
+To complete the operation, commit and push the change.
+git rm --cached vs git rm
+
+Both commands remove one or many files from the Git index.
+
+The most significant difference between those two commands is:
+
+    The git rm --cached command keeps the file in the working area.
+    The git rm command deletes the file from the working area.
+
+How to revert?
+
+To revert the git rm --cached command, you can use the git reset HEAD . command.
+
+If you've committed the changes, you can use the git reset HEAD~1 command to revert.

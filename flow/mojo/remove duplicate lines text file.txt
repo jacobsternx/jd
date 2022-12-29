@@ -1,0 +1,103 @@
+https://linuxconfig.org/removing-duplicate-lines-from-a-text-file-using-linux-command-line
+
+Removing duplicate lines from a text file using Linux command line
+17 May 2021 by Luke Reynolds
+
+Removing duplicate lines from a text file can be done from the Linux command line. Such a task may be more common and necessary than you think. The most common scenario where this can be helpful is with log files. Oftentimes log files will repeat the same information over and over, which makes the file nearly impossible to sift through, sometimes rendering the logs useless.
+
+In this guide, we’ll show various command line examples that you can use to delete duplicate lines from a text file. Try out some of the commands on your own system, and use whichever one is most convenient for your scenario.
+
+In this tutorial you will learn:
+
+    How to remove duplicate lines from file when sorting
+    How to count the number of duplicate lines in a file
+    How to remove duplicate lines without sorting the file
+
+Various examples for removing duplicate lines from a text file on Linux
+
+Various examples for removing duplicate lines from a text file on Linux
+
+Software Requirements and Linux Command Line Conventions Category 	Requirements, Conventions or Software Version Used
+System 	Any Linux distro
+Software 	Bash shell
+Other 	Privileged access to your Linux system as root or via the sudo command.
+Conventions 	# – requires given linux commands to be executed with root privileges either directly as a root user or by use of sudo command
+$ – requires given linux commands to be executed as a regular non-privileged user
+Remove duplicate lines from text file
+
+ 
+
+These examples will work on any Linux distribution, provided that you are using the Bash shell.
+
+For our example scenario, we’ll be working with the following file, which just contains the names of various Linux distributions. This is a very simple text file for the sake of example, but in reality you could use these methods on documents that contain even thousands of repeat lines. We’ll see how to remove all the duplicates from this file using the examples below.
+
+$ cat distros.txt
+Ubuntu
+CentOS
+Debian
+Ubuntu
+Fedora
+Debian
+openSUSE
+openSUSE
+Debian
+
+Example 1
+    The uniq command is able to isolate all of the unique lines from our file, but this only works if the duplicate lines are adjacent to each other. In order for the lines to be adjacent, they would first need to be sorted into alphabetical order. The following command would work by using sort and uniq.
+
+    $ sort distros.txt | uniq
+    CentOS
+    Debian
+    Fedora
+    openSUSE
+    Ubuntu
+
+    To make things easier, we can just use the -u with sort to get the same exact result, instead of piping to uniq.
+     
+
+    $ sort -u distros.txt
+    CentOS
+    Debian
+    Fedora
+    openSUSE
+    Ubuntu
+
+Example 2
+    To see how many occurrences of each line is in the file, we can use the -c (count) option with uniq.
+
+    $ sort distros.txt | uniq -c
+          1 CentOS
+          3 Debian
+          1 Fedora
+          2 openSUSE
+          2 Ubuntu
+
+Example 3
+    To see the lines that repeat most often, we can pipe to yet another sort command with the -n (numeric sort) and -r reverse options. This allows us to quickly see which lines are most duplicated in the file – another handy option for sifting through logs.
+
+    $ sort distros.txt | uniq -c | sort -nr
+          3 Debian
+          2 Ubuntu
+          2 openSUSE
+          1 Fedora
+          1 CentOS
+
+
+Example 4     
+    One problem with using the previous commands is that we rely on sort. This means that our final output is alphabetically sorted, or sorted by amount of repeats as in the previous example. This may be a good thing sometimes, but what if we need the text file to retain its previous order? We can eliminate duplicate lines without sorting the file by using the awk command in the following syntax.
+
+    $ awk '!seen[$0]++' distros.txt 
+    Ubuntu
+    CentOS
+    Debian
+    Fedora
+    openSUSE
+
+    With this command, the first occurrence of a line is kept, and future duplicate lines are scrapped from the output.
+
+Example 5
+    The previous examples will send output directly to your terminal. If you want a new text file with your duplicate lines filtered out, you can adapt any of these examples by simply using the > bash operator like in the following command.
+
+    $ awk '!seen[$0]++' distros.txt > distros-new.txt
+
+These should be all the commands you need in order to drop duplicate lines from a file, while optionally sorting or counting the lines. More methods do exist, but these are the easiest to use and remember.

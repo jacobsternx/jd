@@ -1,0 +1,1 @@
+... figure out the correct git mojo to truncate the repo to start with that commit.

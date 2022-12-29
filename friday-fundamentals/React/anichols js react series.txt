@@ -1,0 +1,12 @@
+use context, menu, ref, callback, 
+custom hook
+webhook
+tailwind
+axios
+confluence article wizards area, training, 
+recommendations when playing around, training spaces?
+Use this repo.
+use git
+jb video app (todo app)
+production deployment changing to use AWS codepipeline.
+currently no react.

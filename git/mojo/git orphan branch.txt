@@ -1,0 +1,25 @@
+https://stackoverflow.com/questions/58761702/git-orphan-remove-history
+Git orphan remove history
+
+...
+Assuming you mean git checkout --orphan name: what this does is arrange for the next commit to be a root commit. You are now on a branch that does not exist. This is basically the same state you would have in a new, totally-empty repository.
+
+When you have no repository and then create one with git init, that new repository has no commits. This creates a problem, because in Git, a branch name holds the hash ID of one actual, existing commit. Hence this empty repository cannot have a branch. It has no commits. The branches must identify commits, and there are none. So it has no branches. Nonetheless, you're on branch master.
+
+The way Git handles this is to allow you to be on a branch that does not exist. That is what—and in fact all—that git checkout --orphan does: it puts you on a branch that does not exist.
+
+When you are in this state, the next commit you make will create a commit. The creation of that commit enables the branch to exist. Git writes the commit hash ID into the branch name, creating the branch name in the process. The branch now exists and has one commit on it. Because the branch you were on did not actually exist, the new commit has no parent: it is a root commit.
+
+You edited your question to add:
+
+    I did git rm -rf .
+
+This merely affects Git's index. The index is the entity Git uses to hold all the files that will go into the next commit. So the index is now actually empty. Except in a new, totally-empty repository, this state is pretty unusual: normally, the index holds all the files copied out of the commit you have checked out. You'll want to put some file(s) into the index, using git add, before making the new root commit.
+
+You also edited your question to cross out a question:
+
+    Does it still have my history and files on other branches ...
+
+Yes. History, in Git, is commits; commits are history. Adding a new branch name, pointing to a new root commit, has no effect on any existing branch names and the commits to which they point. No existing commit is harmed by the creation of a new commit.
+
+All the commits that are in your repository continue to be in your repository. Your new root commit is now in your repository, and your branch name now exists, pointing to the new root commit.

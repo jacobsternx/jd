@@ -1,0 +1,19 @@
+https://stackoverflow.com/questions/30590083/how-do-i-rename-both-a-git-local-and-remote-branch-name
+
+Along with the other steps others have laid out, remember:
+
+In the event that you are trying to delete the default branch, e.g. master, you will get this error when running git push origin :<branch_name>
+
+! [remote rejected] master (refusing to delete the current branch: refs/heads/<branch_name>) error: failed to push some refs to '<repo_name>'.
+a) Change the default before deleting the branch (Github example)
+
+    Go to your repo.
+    Click on "Settings"
+    Change the default branch as shown in the picture below:
+
+enter image description here
+b) Then delete the [target] remote:
+
+$ git push origin :master
+
+

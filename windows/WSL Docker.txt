@@ -1,0 +1,63 @@
+mkdir hello-docker
+open in vs code
+new file: app.js
+console.log("Hello Docker!");
+
+Dockerize: Build, develop, ship app
+Install node
+node.js (JRE)
+
+Need OS
+Install node
+Copy app files
+Run node app.js
+
+VS Code
+filename: Dockerfile
+VS Code: Do you want to install recommended Docker extension? Y
+
+FROM node:17-alpine (node v.17 + latest small version of linux)
+WORKDIR /app (absolute path in image)
+RUN npm install (add all dependencies to image)
+COPY . . (copy all files from current dir into dir on the image)
+EXPOSE 80 (listen on port 80, default is no networking)
+CMD ["node, app.js"]
+
+Note: to ignore a folder or file, enter in .dockerignore like so:
+node-modules (folder)
+*.md (all .md files)
+
+-now go to docker terminal and tell docker to package application-
+cd <app-dir>
+docker build -t hello-docker . (-t == tag, . ==current dir==~/Desktop/hello-docker)
+
+Image not stored in /app, in fact in several places.
+to see all images on Docker:
+docker images
+
+to run /home/jacob/hello-docker 
+to run -p 80:80 -v /users/jacob/docker/src:/var/www/html/ hello-docker 
+(listen on port 80, redirect to port 80, mount volume in image /users/jacob/docker/src at /var/www/html in image, and if volume is updated, reflected in container.)
+docker run hello-docker
+
+To pull Ubuntu into Docker:
+docker pull ubuntu
+-or-
+docker run ubuntu (if local install, run that, else download)
+if don't interact with container, container stops downloading.
+
+docker ps (list of running Docker containers)
+docker ps -a (list of running DOcker containers + stopped containers)
+
+docker run -it (interactive)
+when logged in looks like:
+root@machinename:/#
+-or-
+user@machinename:/user$
+
+echo $0 (shows location of bash shell, /bin/bash)
+
+Ctrl-C stops a container, if the main process hasn't already.
+
+
+

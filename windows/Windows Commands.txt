@@ -1,0 +1,5 @@
+New folder: CTRL+SHIFT+N (in explorer)
+
+stop-service com.docker.service (in powershell)
+wsl.exe shutdown (in powershell)
+

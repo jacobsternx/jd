@@ -1,0 +1,42 @@
+Windows Terminal Ubuntu theme and icon settings
+
+wsl --export <distro> <filename.tar>wsl --import <distro> <install location=""> <filename> </filename></install></distro></filename.tar></distro>
+
+:: Icon ::
+C:\Users\Coby\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\AC\INetCache\2COU41HD\
+
+:: Color ::
+            {
+            "hidden": false,
+            "icon": "https://assets.ubuntu.com/v1/49a1a858-favicon-32x32.png",
+            "name": "Ubuntu-20.04",
+            "source": "Windows.Terminal.Wsl"
+            },
+
+"icon": "ms-appdata:///roaming/ubuntu.ico"
+
+        {
+            "background": "#300A24",
+            "black": "#171421",
+            "blue": "#0037DA",
+            "brightBlack": "#767676",
+            "brightBlue": "#08458F",
+            "brightCyan": "#2C9FB3",
+            "brightGreen": "#26A269",
+            "brightPurple": "#A347BA",
+            "brightRed": "#C01C28",
+            "brightWhite": "#F2F2F2",
+            "brightYellow": "#A2734C",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#3A96DD",
+            "foreground": "#FFFFFF",
+            "green": "#26A269",
+            "name": "Ubuntu",
+            "purple": "#881798",
+            "red": "#C21A23",
+            "selectionBackground": "#FFFFFF",
+            "white": "#CCCCCC",
+            "yellow": "#A2734C"
+        },
+
+C:\Users\Coby\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState

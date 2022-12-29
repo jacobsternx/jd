@@ -1,0 +1,51 @@
+Update Homebrew
+Here's how to update Homebrew on a Mac using brew update. You should update Homebrew before installing new packages.
+https://mac.install.guide/homebrew/4.html
+
+See the section Housekeeping for Homebrew for complete details about updating Homebrew, upgrading packages, and saving disk space by removing old versions and cache files.
+
+Steps
+Here are steps to update Homebrew (details in this complete guide).
+
+brew update
+brew doctor
+brew upgrade (to upgrade packages)
+Brew update
+Keep Homebrew up to date with brew update. Updating Homebrew can take many minutes, so run the update before trying to install a package. It is better to run these checks yourself rather than waiting for Homebrew to run the updates automatically.
+
+$ brew update
+Already up-to-date.
+This updates Homebrew itself. It can take many minutes to run an update.
+
+Homebrew core packages are updated as often as every day, so it is likely you will see updates.
+
+Brew doctor
+After you update Homebrew, run diagnostics.
+
+$ brew doctor
+Your system is ready to brew.
+
+
+Homebrew itself is now up to date and you can install any packages you need.
+
+If you have already installed packages, you my want to install the newest version of each package with brew upgrade.
+
+Brew upgrade (upgrade packages)
+It is important to know that brew update and brew upgrade are different. Update is for Homebrew itself. Upgrade is for individual software packages. You won't need to bring software packages up to date until you need the latest versions, so you may not run this command often.
+
+Here's how to install the newest version of a package:
+
+$ brew upgrade <package>
+Install the newest version of all packages:
+
+$ brew upgrade
+You must allow time to upgrade all packages. It can take many minutes.
+
+Brew list
+As you use Homebrew, it is helpful to see a list of all the packages you've installed:
+
+$ brew list
+You can also see a diagram of packages and dependencies.
+
+$ brew deps --tree --installed
+Immediately after installation, these commands show nothing is installed.

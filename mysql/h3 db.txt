@@ -1,0 +1,15 @@
+[accounts]
+account_id (1:1) (P)
+account_name (1:1)
+account_csm (1:1)
+account_school (*:1) (A-J)
+* account_school_loc (1:1)
+* account_school_teams (*:1)
+  [events] (many events per school)
+  event_id (1:1) (P)
+  event_name (1:1)
+  event_loc (1:1)
+  event_policy (1:1)
+    [tickets] (many tix per event)
+    ticket_order (1:1) (P)
+    * ticket_ids  man ticket ids per order

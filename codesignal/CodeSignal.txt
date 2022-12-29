@@ -1,0 +1,42 @@
+:: mySQL ::
+
+SHOW DATABASES;
+
+DROP TABLE table1;
+
+CREATE TABLE table1 (
+	internal_id int,
+	project_name varchar(255),
+	team_size int,
+	team_lead varchar(255),
+	income int,
+	PRIMARY KEY(internal_id)
+);
+
+INSERT INTO table1 (internal_id, project_name, team_size, team_lead, income)
+VALUES 
+   (1384, 'MapReduce', 100, 'Jeffrey Dean', 0),
+   (2855, 'Windows', 1000, 'Bill Gates', 100500),
+   (5961, 'Snapchat', 3, 'Evan Spiegel', 2000);
+
+SELECT * FROM table1 ORDER BY internal_id ASC; 
+ALTER TABLE table1 
+DROP internal_id,
+DROP team_size; 
+SELECT * FROM table1;
+
+RIGHT is a mySQL reserved word. It will work only when wrapped in backticks.
+
+When you're not using reserved words, it will work without the backticks, as well.
+
+The second way will never work because backticks are used to quote strings, but never database, table or column identifiers.
+
+npm test -- SomeTestFileToRun
+
+The stand-alone -- is *nix magic for marking the end of options, meaning (for NPM) that everything after that is passed to the command being run, in this case jest. As an aside, you can display Jest usage notes by saying
+
+npm test -- --help
+Anyhow, chanting
+
+npm test -- Foo
+runs the tests in the named file (FooBar.js).

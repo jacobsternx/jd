@@ -1,0 +1,34 @@
+Installing NVM on Ubuntu
+
+A shell script is available for the installation of nvm on the Ubuntu 22.04 (Jammy Jellyfish) Linux system. Open a terminal on your system or connect a remote system using SSH. Use the following commands to install curl on your system, then run the nvm installer script.
+
+sudo apt install curl 
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash 
+The nvm installer script creates an environment entry to the login script of the current user. You can either log out and log in again to load the environment or execute the below command to do the same.
+
+source ~/.profile 
+Installing Node using NVM
+You can install any number of node.js versions of your requirements using nvm. Then you can use the required version for your application from installed node.js.
+
+Install the latest version of node.js. Here node is the alias for the latest version.
+nvm install node 
+To install a specific version of node:
+nvm install 16.14.0  
+You can choose any other version to install using the above command. The very first version installed becomes the default. New shells will start with the default version of the node (e.g., nvm alias default).
+
+Working with NVM
+You can use the following command to list installed versions of the node for the current user.
+
+nvm ls 
+List available node.js versions for the installation.
+
+nvm ls-remote 
+You can also select a different version for the current session. The selected version will be the currently active version for the current shell only.
+
+nvm use 16.14.0 
+To find the default Node version set for the current user, type:
+
+nvm run default --version 
+You can run a Node script with the desired version of node.js using the below command:
+
+nvm exec 16.14.0 server.js 

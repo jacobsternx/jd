@@ -1,0 +1,65 @@
+:: Basics
+Download wordpress
+Download storefront theme (or shopper)
+configure ...
+coupon plugins ...
+backup: export > SQL
+wp backup plugin UpdraftPlus: https://updraftplus.com/
+backup, update wp and plugins, then backup again (or update and reconfigure)
+
+:: Import Products
+Which folder, import, etc.
+
+:: Allow cash orders to be placed
+Briefly, could you enable the Cash on Delivery method from WooCommerce → Settings → Payments and check if it is shown on the checkout page?
+
+:: How to form SQL searches
+"beanie" "musk"
+8 matches in wp_postmeta (meta_id, post_id, meta_key, meta_value)
+4 matches in wp_posts (ID)
+2 matches in wp_wc_product_meta_lookup
+5 matches in wp_woocommerce_order_items
+
+1 match in wp_wc_product_meta_lookup
+2 matches in wp_posts
+4 matches in wp_woocommerce_order_items
+
+SELECT wp_postmeta, wp_posts
+FROM wp_postmeta
+JOIN wp_posts
+ON wp_postmeta.meta_id = wp_posts.id;
+
+MySQL said: Documentation
+#1054 - Unknown column 'wp_postmeta' in 'field list'
+
+How to find WooCommerce products in the database
+Let’s show how to find products that you need and look at the relevant tables which contain your product data.
+
+In newer WooCommerce (since 3.7+) versions are products stored in the following tables (mainly the first two): 
+
+wp_posts 
+(table with a post_type product or product_variation)
+wp_postmeta 
+(table with a post_id as the relational index) (the product ID)
+wp_wc_product_meta_lookup 
+(table – product_id as the relational index) (the post ID) | Allow fast queries on specific product data
+wp_wc_order_product_lookuptable – product_id as the relational index (the post ID) | Allow fast queries to retrieve products on orders
+
+SQL query on table wordpress.wp_posts:
+	
+SELECT * FROM `wp_posts` WHERE `post_type` LIKE 'product'
+phpMyAdmin – search post_type
+
+Product categories, subcategories, tags, attributes, or custom taxonomies are stored in the following tables (some additional plugins got their own tables):
+
+    wp_terms
+    wp_termmeta
+    wp_term_taxonomy
+    wp_term_relationships – column object_id as the relational index (the product ID)
+    wp_woocommerce_termmeta
+    wp_woocommerce_attribute_taxonomies (for product attributes only)
+    wp_wc_category_lookup (for product categories hierarchy – since WooCommerce 3.7)
+
+In fact, products are stored only as another post type. They can be found in the wp_posts table, under the product post type.
+
+When you find the product that you need, copy its id and easily lookup for the remaining information under other tables.

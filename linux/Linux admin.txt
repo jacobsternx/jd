@@ -1,0 +1,39 @@
+https://linuxiac.com/how-to-change-remove-disable-user-password-in-linux/
+
+:: change password
+sudo passwd
+
+:: remove password
+sudo passwd -d <username>
+
+:: change expired password
+sudo passwd -e <username>
+
+:: force change password 
+sudo chage -l <username>
+
+:: disable password, locking account ::
+:: set the user shell to nologin to avoid security issues ::
+sudo passwd -l username 
+sudo usermod -s /usr/sbin/nologin username
+
+:: unlock account ::
+:: reset login shell back to /bin/bash ::
+sudo passwd -u username
+sudo usermod -s /bin/bash username
+
+:: check status of username ::
+:: check all user statuses
+sudo passwd -S username
+sudo passwd -Sa
+
+(items displayed)
+1. first name
+2. last name
+3. date last login
+4. min password life before changed
+5. min password lifetime before must be changed
+6. max password lifetime before must be changed
+7. numer of days after password lifetime lifetime expires when user is disabled
+
+

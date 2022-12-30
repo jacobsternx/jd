@@ -17,3 +17,26 @@ b) Then delete the [target] remote:
 $ git push origin :master
 
 
+
+$ git fetch origin
+
+$ git branch -u origin/master master
+branch 'master' set up to track 'origin/master'.
+$ git remote set-head origin -a
+origin/HEAD set to master
+
+
+$ git pull
+Your configuration specifies to merge with the ref 'refs/heads/master'
+from the remote, but no such ref was fetched.
+$ git status
+On branch master
+Your branch and 'origin/master' have diverged,
+and have 1 and 2 different commits each, respectively.
+  (use "git pull" to merge the remote branch into yours)
+
+Your configuration specifies to merge with the ref 'refs/heads/master'
+from the remote, but no such ref was fetched.
+Your branch and 'origin/master' have diverged,
+and have 1 and 2 different commits each, respectively.
+  (use "git pull" to merge the remote branch into yours)

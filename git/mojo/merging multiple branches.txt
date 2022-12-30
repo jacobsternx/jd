@@ -1,0 +1,31 @@
+https://stackoverflow.com/questions/5292184/merging-multiple-branches-with-git
+
+Merging multiple branches with git
+
+$ git branch -a
+* develop
+  master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/feature1
+  remotes/origin/feature2
+  remotes/origin/master
+
+How can I merge remotes/origin/feature1 and remotes/origin/feature2 into my local "master" branch, copy that all into "develop" and start working with actual code in my "develop" branch?
+
+
+    git checkout master
+    git pull origin feature1 feature2
+    git checkout develop
+    git pull . master (or maybe git rebase ./master)
+
+The first command changes your current branch to master.
+
+The second command pulls in changes from the remote feature1 and feature2 branches. This is an "octopus" merge because it merges more than 2 branches. You could also do two normal merges if you prefer.
+
+The third command switches you back to your develop branch.
+
+The fourth command pulls the changes from local master to develop.
+
+Hope that helps.
+
+EDIT: Note that git pull will automatically do a fetch so you don't need to do it manually. It's pretty much equivalent to git fetch followed by git merge.

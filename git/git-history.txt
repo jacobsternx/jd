@@ -54,5 +54,7 @@ git switch main
 git --version
 sudo git config --global user.email "jacobsternx@gmail.com"
 sudo git config --global user.name "jacobsternx"
-git merge master
+git merge master (this got my refs sorted so I could push to origin)
+Your branch and 'origin/master' have diverged, and have 1 and 2 different commits each, respectively. (use "git pull" to merge the remote branch into yours)
+
 touch .gitignore

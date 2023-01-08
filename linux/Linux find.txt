@@ -1,4 +1,4 @@
-:: Using prune to exclude directories ::
+:: Find using prune to exclude directories ::
 
 Use the -prune primary. For example, if you want to exclude ./misc:
 

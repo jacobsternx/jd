@@ -31,7 +31,8 @@ sudo reboot now
 apt install dkms linux-headers-$(uname -r) build-essential
 apt install lightwm awesome synaptic nemo firefox-esr
 apt install gdisk gnome-system-monitor gnome-terminal nitrogen transmission
-apt install exa (bash alias) ripgrep (bash alias)
+apt install exa (bash alias)
+apt install ripgrep (bash alias)
 (left polybar alacritty fish leafpad)
 (gimp vlc libreoffice-calc libreoffice-writer transmission)
 apt clean       (removes packages and install scripts in /var/cache/apt/archives)

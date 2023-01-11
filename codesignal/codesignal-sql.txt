@@ -30,13 +30,3 @@ RIGHT is a mySQL reserved word. It will work only when wrapped in backticks.
 When you're not using reserved words, it will work without the backticks, as well.
 
 The second way will never work because backticks are used to quote strings, but never database, table or column identifiers.
-
-npm test -- SomeTestFileToRun
-
-The stand-alone -- is *nix magic for marking the end of options, meaning (for NPM) that everything after that is passed to the command being run, in this case jest. As an aside, you can display Jest usage notes by saying
-
-npm test -- --help
-Anyhow, chanting
-
-npm test -- Foo
-runs the tests in the named file (FooBar.js).

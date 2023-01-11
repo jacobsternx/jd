@@ -1,0 +1,54 @@
+:: Jan 6, 2023
+
+(video recording)
+Ticket spicket uses node, jquery, 
+Node has a REPL (read evaluate print loop)
+
+:: 2:00
+Show js console by typing Node
+javascript website, node.green
+:: 9:36
+usually use anonymous arrow functions rather than old style.
+::10:30
+may ommit braces to return an expression on one line (implicit returns) or use ()
+if see paren, arrow, paren, most likely implicit return.
+if only one parameter, do not need ()
+exception is scope of the 'this' keyword
+old vs arrow functions: new arrow style preserves the outer scope of this (called lexical scope), thus do not need outer bind after function to preserve scope.
+this is the only reason an arrow function might ever not be used, or if the name of the function needs to be something specific.
+See lots of arrow fns and implicit returns.
+Andrew usually adds parens to single params
+Also, arrow fn's cannot use arguments argument that lists all arguments even if undefined.
+:: 23:30
+var keyword is function scoped, not block scoped
+:: 27:34
+js does what's called hoisting of variables (var) within a function so that they are available to all calls, even in other loops.
+using let (or const) keyword prevents hoisting, returns variables to block scope.
+:: 29:30 
+Something called temporal dead zone that does hoisting, wherein with let, cannot use variable until it is initialized. (errmsg)
+:: 30:21
+const, arrays, objects: can manipulate arrays and objects, but cannot change it to a different array or a different object.
+Can also define variables within nested objects
+:: 26:28
+Relatively new feature in js: Default Parameters, confusing looking, not today.
+:: 37:22
+js has undefined and NULL, bc NULL is considered a defined value.
+destructuring
+:: 40:01
+Sparse arrays, such as [1, <empty items>, 10] probably not a good idea to use, but can be used in an array to get specific items in array.
+:: 43:30
+Using the above in reverse, called shorthand properties on node.green website.
+Like destructuring, anichols calls restructures.
+Aaron Shearer shares everything is an object
+Anichols shares .isarray is a handy way of knowing if a thing is an array.
+:: 47:02
+Next is spreading things
+spread and rest
+
+Next friday: 
+computed properties and objects
+shorthand methods forof loops
+template literals
+nullish coalescing
+logical assignment
+optional chaining

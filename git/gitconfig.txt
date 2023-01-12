@@ -11,3 +11,20 @@ remote.origin.url=https://github.com/jacobsternx/h3.git
 remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
 branch.master.remote=origin
 branch.master.merge=refs/heads/master
+
+
+[core]
+	editor = \"C:\\Users\\jacob.stern\\AppData\\Local\\Programs\\Microsoft VS Code\\bin\\code\" --wait
+[user]
+	name = jacobsternx
+	email = 75816278+jacobsternx@users.noreply.github.com
+# https://pslmodels.github.io/Git-Tutorial/content/txteditor/VScode.html#chap-vscode 
+# Add lines below to existing content in ~/.gitconfig file
+[merge]
+    tool = vscode
+[mergetool "vscode"]s
+    cmd = code --wait $MERGED
+[diff]
+    tool = vscode
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE

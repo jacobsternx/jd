@@ -18,7 +18,8 @@ branch.master.merge=refs/heads/master
 [user]
 	name = jacobsternx
 	email = 75816278+jacobsternx@users.noreply.github.com
-# https://pslmodels.github.io/Git-Tutorial/content/txteditor/VScode.html#chap-vscode 
+
+# https://code.visualstudio.com/docs/sourcecontrol/overview
 # Add lines below to existing content in ~/.gitconfig file
 [merge]
     tool = vscode

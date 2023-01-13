@@ -1,0 +1,5 @@
+Cmd-D and Cmd-Shift-D Split pane vertically or horizontally.
+Cmd-Opt-left, right, up, down arrows Shift pane focus.
+Cmd-Shift-Enter Exit all other panes.
+Cmd-W (or type exit) Exit pane.
+Ctrl-A Jump to beginning of line.

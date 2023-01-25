@@ -1,29 +1,23 @@
-:: ~/.gitconfig
+:: .gitconfig
 [user]
-        name = jacobsternx
-        email = 75816278+jacobsternx@users.noreply.github.com
-[init]
-        defaultBranch = master
+	name = jacobsternx
+	email = jacobsternx@gmail.com
 [credential]
-        helper = store
-[core]
-        excludesfile = /home/jacob/.gitignore_global
-
-:: ~/.gitignore
-**/.DS_Store
-Desktop.ini
-Thumbs.db
+	helper = cache --timeout=18000
 
 :: [early notes]
 git config -l
+git config --global init.defaultBranch master
+git config --global color.ui auto
+git config --global pull.rebase false
+echo .DS_Store >> ~/.gitignore_global
+git config --global core.excludesfile ~/.gitignore_global
 git status
 git add -A
 git commit -m "."
 git push -u origin main
 git reset --hard HEAD [Makes working directory and stage match the most recent commit (also called HEAD), effectively obliterating all tracked uncommitted changes.]
 git clean -d -f [Remove untracked files]
-git config --global init.defaultBranch master
-git config --global core.excludesfile ~/.gitignore_global
 
 :: Generate a Personal Access Token:
 Log into GitHub

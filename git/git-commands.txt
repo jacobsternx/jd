@@ -85,6 +85,7 @@ git push --set-upstream origin main
 :: Advanced Git Operations
 git log shows commits, <SHA> is a git commit ID; git log --stat shows stats about file names and line changes. git log --oneline shows a condensed of 
 changes; git log --oneline shows a condensed list of changes.
+git log --graph --all --decorate --oneline shows a concise graph
 git revert <SHA> Creates a new commit that’s the opposite (or inverse) of the given SHA
 git commit --amend or git commit --amend -m "commit message"
 Will update and replace the most recent commit with a new commit that combines any staged changes with the contents of the previous commit. With nothing currently staged, this just rewrites the previous commit message.

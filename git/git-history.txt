@@ -15,7 +15,7 @@ git config --global core.editor nano
 git config --global credential.helper "cache --timeout=18000"
 git config --global credential.helper store
 git config --global --edit 
-git config --global init.defaultBranch main
+git config --global init.defaultBranch master
 git config --global list
 git config --global --unset core.editor
 git config --global --unset credential.helper
@@ -31,11 +31,7 @@ git log
 git log --stat
 git ls
 git push -f origin master
-git push origin -d -f main
-git push origin -d main
-git push origin main
 git push origin remote
-git push --set-upstream origin main
 git push -u origin
 git push -u origin master
 git reflog
@@ -50,7 +46,6 @@ git reset --soft e47ff61
 git rm --cached Learn-SQL
 git rm -f --cached Learn-SQL
 git status
-git switch main
 git --version
 sudo git config --global user.email "jacobsternx@gmail.com"
 sudo git config --global user.name "jacobsternx"

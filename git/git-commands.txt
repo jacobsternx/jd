@@ -119,3 +119,15 @@ If the files exist, you already have SSH installed. IMPORTANT: But if you wish t
 $ cp ~/.ssh/id_rsa ~/.ssh/id_rsa.old  # Make a copy of the old SSH private key
 $ cp ~/.ssh/id_rsa.pub ~/.ssh/id_rsa.pub.old  # Make a copy of the old SSH public key
 BE CAREFUL when using your ~/.ssh/id_rsa file. This is your private key, guard it properly.
+
+:: Rebase
+git fetch origin main
+git rebase origin/main
+If pushed unrebased branch onto main, must force push to reconcile
+git push -f origin af  (force)
+Note: do not rebase code if others are working on it. Pain to reconcile, will not match!
+If other local copies exist, others must backup and git reset --hard to commit to master.
+If something goes wrong:
+get rebase --abort
+Delete branch
+git branch -d branch-name

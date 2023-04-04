@@ -23,54 +23,24 @@ Press Ctrl+Alt and an arrow key to switch between workspaces. Press Ctrl+Alt+Shi
 Press Win-Shift-PageDown to move active window right one workspace.
 Press Win-Shift-PageUp to move active window left one workspace.
 
-:: Fedora 36 > 37 Upgrade ::
-https://ostechnix.com/upgrade-to-fedora-37-from-fedora-36/
-sudo dnf --refresh update
-sudo dnf upgrade 
-sudo reboot (apply updates)
+:: Fedora 37 > 38 Upgrade ::
+https://www.linuxcapable.com/how-to-upgrade-fedora-release/
 cat /etc/fedora-release  (check current version before upgrade)
 cat /etc/os-release  (check current version before upgrade)
-Gnome Software Center > Updates > Fedora 37 Now Available > Download
-Once download complete > prompt to restart and upgrade > Restart & Upgrade
-pop up window prompting you to click Restart & Install Upgrade > Restart And Install Upgrade
-Download and install, then reboot, then Restart and Install Upgrade
-Takes time to download and install
-Check Gnome Software Center is up-to-date in Updates
-cat /etc/fedora-release
-cat /etc/os-release
-Update Device name in Gnome Settings > About (done)
-sudo hostnamectl set-hostname Fedora-37  (updadte hostname)
-sudo dnf system-upgrade clean (clean metadata)
-sudo dnf clean packages (clean more metadata)
-sudo dnf update (list packages with broken or missing dependencies)
-sudo dnf repoquery --unsatisfied
-sudo dnf repoquery --duplicates (list duplicate packages)
-sudo dnf list extras (packages not in repositories)
-sudo dnf remove $(sudo dnf repoquery --extras --exclude=kernel,kernel-*) (remove unused pkgs)
-sudo dnf autoremove
-sudo dnf install remove-retired-packages (remove obsolete and retired packages)
-remove-retired-packages
-sudo dnf install rpmconf (update system configuration files)
-sudo rpmconf -a (NOTE: this will ask to edit separate parts of rpm conf files)
-sudo dnf remove $(dnf repoquery --installonly --latest-limit=-3) (remove unused kernels)
-sudo symlinks -r /usr | grep dangling (see dangling symlinks)
-sudo symlinks -r -d /usr (remove dangling symlinks)
-reboot
-
-:: Fedora 35 > 36 Upgrade ::
-https://www.linuxcapable.com/how-to-upgrade-fedora-35-to-fedora-36-with-gnome-42/
 sudo dnf upgrade --refresh
 sudo dnf autoremove
 sudo dnf install dnf-plugin-system-upgrade -y
-sudo dnf system-upgrade download --releasever=36
+sudo dnf system-upgrade download --releasever=38 
 You will see a message advising importing the GPG keyType, press “Y” to proceed.
-sudo dnf distro-sync (may need to fix error)
-sudo fixfiles -B onboot
+*sudo dnf system-upgrade download --releasever=38  --allowerasing (allow remove conflicts)
+*sudo dnf distro-sync (if --allowerasing does not work do this first)
+*sudo fixfiles -B onboot (may need to reset SELinux permissions)
 sudo dnf system-upgrade reboot
-cat /etc/os-release (will read Fedora 35)
+cat /etc/os-release (shows new Fedora version #)
 sudo dnf system-upgrade clean
-sudo symlinks -r /usr | grep dangling
-sudo hostnamectl set-hostname --static fedora-37
+sudo symlinks -r /usr | grep dangling (list broken symlinks)
+sudo find /usr -type l -xtype l -delete (delete broken symlinks)
+sudo hostnamectl set-hostname --static fedora-##-new (if you want to change hostname)
 reboot
 
 :: Upgrading pre-release (beta) > release (stable)

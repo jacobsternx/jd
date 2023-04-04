@@ -248,7 +248,7 @@ To disable the test page, comment out all the lines in the file /etc/httpd/conf.
 #    Require all granted
 # </Directory>
 
-# Alias /.noindex.html /usr/share/httpd/noindex/index.html
+# alias /.noindex.html /usr/share/httpd/noindex/index.html
 
 Additional resources
 

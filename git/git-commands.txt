@@ -52,7 +52,8 @@ git remote set-url origin https://jacobsternx:<token-value>@github.com/jacobster
 git config -l
 
 :: Clone from GitHub
-git clone https://github.com/jacobsternx/h3.git (in root folder)
+git clone https://github.com/jacobsternx/h3.git (in root folder, token)
+git clone git@github.com:jacobsternx/css-exercises.git (in root folder, ssh)
 
 :: Basic Git Operations
 git add -A stages all changes no matter where executed whether it be the subdirectory or the parent directory.

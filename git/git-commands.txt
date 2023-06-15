@@ -20,16 +20,8 @@ git push -u origin main
 git reset --hard HEAD [Makes working directory and stage match the most recent commit (also called HEAD), effectively obliterating all tracked uncommitted changes.]
 git clean -d -f [Remove untracked files]
 
-:: Generate a Personal Access Token:
-Log into GitHub
-Click on your name / Avatar in the upper right corner and select Settings
-On the left, click Developer settings
-Select Personal access tokens and click Generate new token
-Give the token a description/name and select the scope of the token
-Selected repo for pull, push, clone, and commit actions, and admin:repo_hook
-Click Generate token
-Copy the token – this is your new password!
-Change password: git config --global --unset user.password (Then run your git command)
+:: Change password: 
+git config --global --unset user.password (Then run your git command)
 
 :: Configure Credential Caching
 https://techexpertise.medium.com/storing-git-credentials-with-git-credential-helper-33d22a6b5ce7
@@ -40,7 +32,7 @@ If needed, you can later clear the token from the local computer by running
 git config --global --unset credential.helper
 
 :: Configure local
-Once we have a token, we need to configure the local GIT client with a username and email address. 
+Once we have a token/key, we need to configure the local GIT client with a username and email address. 
 https://www.edgoad.com/2021/02/using-personal-access-tokens-with-git-and-github.html
 git config --global user.name "jacobsternx"
 git config --global user.email "75816278+jacobsternx@users.noreply.github.com"
@@ -48,12 +40,16 @@ git config --global user.email "75816278+jacobsternx@users.noreply.github.com"
 :: Using Personal Access Tokens
 When starting a new repo, the first REMOTE command should be git remote add origin git@github.com:username, if you run git remote set-url origin git@abc.com:mygit you will get error message: No such remote 'origin'.
 git remote add origin git@github.com:jacobsternx
-git remote set-url origin https://jacobsternx:<token-value>@github.com/jacobsternx/h3.git
-git config -l
+git remote set-url origin https://jacobsternx:<token-value>@github.com/jacobsternx/jd.git
+
+:: Using SSH
+Your git URL might have changed. Change the URL in the local directory by using the following command:
+for ssh protocol
+git remote set-url origin git@github.com:jacobsternx/odin.git
 
 :: Clone from GitHub
-git clone https://github.com/jacobsternx/h3.git (in root folder, token)
-git clone git@github.com:jacobsternx/css-exercises.git (in root folder, ssh)
+git clone https://github.com/jacobsternx/jd.git (Token)
+git clone git@github.com:jacobsternx/css-exercises.git (SSH)
 
 :: Basic Git Operations
 git add -A stages all changes no matter where executed whether it be the subdirectory or the parent directory.
@@ -62,6 +58,7 @@ git add . stages new files and modifications, without deletions (on the current 
 git commit -m "commit message"
 git-secrets scans commits, commit messages, and --no-ff merges to prevent adding secrets into your git repositories. If a commit, commit message, or any commit in a --no-ff merge history matches one of your configured prohibited regular expression patterns, then the commit is rejected.
 
+:: fatal: The current branch master has no upstream branch
 https://stackoverflow.com/questions/23401652/fatal-the-current-branch-master-has-no-upstream-branch
 git push origin head -u 
 If you are on any branch, this creates the branch of same name on the remote. 
@@ -71,13 +68,12 @@ git branch
 
 First use git pull origin your_branch_name Then use git push origin your_branch_name
 git pull --rebase git_url(Ex: https://github.com/username/reponame.git)
-git push origin main
+git push origin master
 If it shows any fatal error regarding upstream after any future push then simply run:
-git push --set-upstream origin main
-
+git push --set-upstream origin master
 :: Block command line pushes that expose my email: Solve it by modifying Git email
    75816278+jacobsternx@users.noreply.github.com
-1. View current global user email: git config — global user.email
+1. View current global user email: git config —global user.email
 2. Find GitHub recommended email: in setting Email –> Email under keep my email private 
 3. Reset global user email: git config --global user.email "75816278+jacobsternx@users.noreply.github.com"
 4. Reset last submitted author information git commit --amend --reset-author
@@ -114,13 +110,13 @@ To commit the changes made in the custom branch
 To make changes in your GitHub repo
   git push
 
-:: Git SSH Private/Public key pair 
-Check if you already have a SSH keypair generated. Do the following:
-$ ls -la ~/.ssh/id_rsa*
-If the files exist, you already have SSH installed. IMPORTANT: But if you wish to regenerate the SSH key pair, at least back up your old SSH keys.
-$ cp ~/.ssh/id_rsa ~/.ssh/id_rsa.old  # Make a copy of the old SSH private key
-$ cp ~/.ssh/id_rsa.pub ~/.ssh/id_rsa.pub.old  # Make a copy of the old SSH public key
-BE CAREFUL when using your ~/.ssh/id_rsa file. This is your private key, guard it properly.
+:: GIT_DISCOVERY_ACROSS_FILESYSTEM not set
+fatal: Not a git repository (or any parent up to mount parent /home/jacobsternx)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+https://stackoverflow.com/questions/16853624/git-discovery-across-filesystem-not-set
+git init (this worked)
+git remote set-url origin git@github.com:jacobsternx/odin.git (this may've helped)
+git config -L (verify settings)
 
 :: Rebase
 git fetch origin main
@@ -133,3 +129,21 @@ If something goes wrong:
 get rebase --abort
 Delete branch
 git branch -d branch-name
+
+:: Git Create SSH Private/Public key pair 
+Check if you already have a SSH keypair generated. Do the following:
+$ ls -la ~/.ssh/id_rsa*
+If the files exist, you already have SSH installed. IMPORTANT: But if you wish to regenerate the SSH key pair, at least back up your old SSH keys.
+$ cp ~/.ssh/id_rsa ~/.ssh/id_rsa.old  # Make a copy of the old SSH private key
+$ cp ~/.ssh/id_rsa.pub ~/.ssh/id_rsa.pub.old  # Make a copy of the old SSH public key
+BE CAREFUL when using your ~/.ssh/id_rsa file. This is your private key, guard it properly.
+
+:: Generate a Personal Access Token:
+Log into GitHub
+Click on your name / Avatar in the upper right corner and select Settings
+On the left, click Developer settings
+Select Personal access tokens and click Generate new token
+Give the token a description/name and select the scope of the token
+Selected repo for pull, push, clone, and commit actions, and admin:repo_hook
+Click Generate token
+Copy the token – this is your new password!

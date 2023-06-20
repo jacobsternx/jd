@@ -16,7 +16,7 @@ git config --global core.autocrlf false
 git status
 git add -A
 git commit -m "."
-git push -u origin main
+git push -u origin master
 git reset --hard HEAD [Makes working directory and stage match the most recent commit (also called HEAD), effectively obliterating all tracked uncommitted changes.]
 git clean -d -f [Remove untracked files]
 
@@ -119,9 +119,9 @@ git remote set-url origin git@github.com:jacobsternx/odin.git (this may've helpe
 git config -L (verify settings)
 
 :: Rebase
-git fetch origin main
-git rebase origin/main
-If pushed unrebased branch onto main, must force push to reconcile
+git fetch origin master
+git rebase origin/master
+If pushed unrebased branch onto master, must force push to reconcile
 git push -f origin af  (force)
 Note: do not rebase code if others are working on it. Pain to reconcile, will not match!
 If other local copies exist, others must backup and git reset --hard to commit to master.

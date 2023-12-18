@@ -1,4 +1,0 @@
-To show the Dock on another screen move the cursor to the bottom of the 
-screen on the display you want the Dock to appear and then keep moving the 
-cursor down. The Dock should move to that display.
-Apr 27, 2023

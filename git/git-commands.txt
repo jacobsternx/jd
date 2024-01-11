@@ -14,7 +14,10 @@ echo .DS_Store >> ~/.gitignore_global
 git config --global core.excludesfile ~/.gitignore_global
 git config --global core.autocrlf false
 git status
-git add -A
+git add . stages new files and modifications, without deletions
+git add -A is equivalent to git add --all
+(note: there's no git add -a, case matter
+git add -u is equivalent to git add --update
 git commit -m "."
 git push -u origin master
 git reset --hard HEAD [Makes working directory and stage match the most recent commit (also called HEAD), effectively obliterating all tracked uncommitted changes.]
@@ -42,6 +45,9 @@ When starting a new repo, the first REMOTE command should be git remote add orig
 git remote add origin git@github.com:jacobsternx
 git remote set-url origin https://jacobsternx:<token-value>@github.com/jacobsternx/jd.git
 
+:: Rename remote
+git remote set-url origin ssh://newhost.com/usr/local/gitroot/myproject.git
+
 :: Using SSH
 Your git URL might have changed. Change the URL in the local directory by using the following command:
 for ssh protocol
@@ -50,6 +56,30 @@ git remote set-url origin git@github.com:jacobsternx/odin.git
 :: Clone from GitHub
 git clone https://github.com/jacobsternx/jd.git (Token)
 git clone git@github.com:jacobsternx/css-exercises.git (SSH)
+
+:: Revert latest commit
+  git revert HEAD
+revert the latest commit, skipping the commit message editor:
+  git revert HEAD --no-edit
+Revert last 2 commits
+  git revert HEAD~1
+
+:: Reset last commit
+  git reset --soft HEAD~1
+
+:: Amend commit message (change)
+(unpushed)
+git add .
+git commit --amend -m "New commit message."
+(pushed)
+git commit --amend m
+git commit --amend -m "New commit message."
+git push --force <remoteName> <branchName>
+(pushed older or multiple)
+git rebase -i HEAD~5
+:: must stage changes first
+
+
 
 :: Basic Git Operations
 git add -A stages all changes no matter where executed whether it be the subdirectory or the parent directory.
@@ -97,6 +127,15 @@ pick
 autosquash
 
 :: To add files on specific branch ::
+List all local branches
+  git branch
+List all remote branches
+  git branch -r
+List all branches
+  git branch -a
+Detailed branch info
+  git branch -vv
+  git branch -vva
 To create custom branch
   git branch branchname
 To switch into custom branch
@@ -109,6 +148,16 @@ To commit the changes made in the custom branch
   git commit -m "your message"
 To make changes in your GitHub repo
   git push
+
+:: Rename existing remote
+1. Confirm the name of your current remote:
+  git remote -v
+2. Change name of current remote repo named beanstalk, future name origin:
+  git remote rename beanstalk origin
+3.  Verify remote changed from “beanstalk” to “origin”:
+  git remote -v
+  origin https://somename.github.com/reponame.git (fetch)
+  origin https://somename.github.com/reponame.git (push)
 
 :: GIT_DISCOVERY_ACROSS_FILESYSTEM not set
 fatal: Not a git repository (or any parent up to mount parent /home/jacobsternx)
@@ -128,7 +177,7 @@ If other local copies exist, others must backup and git reset --hard to commit t
 If something goes wrong:
 get rebase --abort
 Delete branch
-git branch -d branch-name
+git branch -d branch-nam
 
 :: Git Create SSH Private/Public key pair 
 Check if you already have a SSH keypair generated. Do the following:
@@ -147,3 +196,9 @@ Give the token a description/name and select the scope of the token
 Selected repo for pull, push, clone, and commit actions, and admin:repo_hook
 Click Generate token
 Copy the token – this is your new password!
+
+:: Empty Folders
+Unofficially, for Git to recognize an empty directory, put a file named .gitkeep in it.
+copy nul > .gitkeep
+
+

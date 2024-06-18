@@ -1,0 +1,58 @@
+:: VS Code in Fedora :: 
+How to Install Visual Studio Code in Fedora and CentOS
+RahulBy RahulApril 2, 20172 Mins ReadUpdated:June 18, 2021
+Visual Studio Code (not Visual Studio IDE) is a lightweight source code editor 
+:: Step 1 – Enable Yum Repository
+Visual Studio code provides an official yum repository for the installation of package on Yum supported system. 
+The same repository can be used for Fedora systems to use with dnf. 
+Let’s create a new file /etc/yum.repos.d/vscode.repo and edit in your favorite text editor.
+  sudo nano /etc/yum.repos.d/vscode.repo
+Add the below content:
+
+-- 8< --
+[vscode]
+name=Visual Studio Code
+baseurl=https://packages.microsoft.com/yumrepos/vscode
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.microsoft.com/keys/microsoft.asc
+-- 8< --
+
+::Step 2 – Install Visual Studio Code
+Yum will manage the gpg key for you, But you can also Import the package signing GPG key on your system using:
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+:: After importing GPG key, Let’s use commands to install Visual Studio Code on your RHEL based system.
+  sudo dnf install code
+
+:: Shortcuts
+Ctrl-D selects word cursor is on
+Ctrl-Shift-L enters multicursor (multiselect)
+Escape exits multicursor (multiselect)
+
+:: Keyboard Shortcuts in VS Code can be customized via the keybindings.json file.
+File > Preferences > Keyboard Shortcuts 
+Then either edit shortcuts directly or for escape and enter keys, click the Open Keyboard Shortcuts (JSON) button on the top right of the editor title bar.
+This will open your keybindings.json file where you can override the Default Keybindings.
+// This is for exiting multicursor
+    {
+        "key": "escape",     
+        "command": "removeSecondaryCursors",
+        "when": "editorHasMultipleSelections && textInputFocus"
+    },
+
+Command Pallette: Ctrl-P
+Settings: Ctrl-comma
+settings > search for 'enable preview' and disable
+"editor.tabSize": 2
+Emmit: ul>li*4 creates ul with 4 items
+	create div class by typing .classname
+Open/Close sidebar: Ctrl-B
+Open Explorer: Ctrl-shift-E
+Open Find: Ctrl-search F
+Open git: Ctrl-search G
+Move line up/down in editor: Alt-Arrow Up/Down
+Multi-select: Ctrl-D to select word, repeat for more word cursors
+Multi-select: Alt-click, drag for vertical cursor 
+Open/Close Terminal: Ctrl-` (backtick) =or= drag up from bottom of screen
+Select tmux terminal as default --> click (+v) > Select default profile > select shell
+Zen mode: Ctrl-K, Z

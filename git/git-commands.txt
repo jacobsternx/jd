@@ -1,0 +1,292 @@
+:: .gitconfig
+
+[credential]
+	# 14400s == 240m == 2h
+	helper = cache --timeout=14400
+# [core] is global to all repos
+[core] 
+	# ensure line endings in files you checkout are correct for macOS
+	autocrlf = input 
+	# there is a working tree, so files can be edited
+	bare = false
+	# vs code is editor
+	editor = code --wait	
+	#exclude files from repo
+	excludesfile = /Users/jacob.stern/.gitignore_global
+	# some filesystems lose the executable bit, and this tells git whether to honor
+	filemode = false 
+	# reflog is all updates chron order, while log is all refs that head pointed to 
+	logallrefupdates = true 
+	# there is a new repositoryformatversion (1) for use with extensions
+	repositoryformatversion = 0 
+	# windows sets this to true, file systems that do not support symlinks will have them converted to text files
+	symlinks = false 
+	# File === file
+	ignorecase = false	
+[user]
+	name = jacobsternx
+	email = 75816278+jacobsternx@users.noreply.github.com
+[init]
+	defaultbranch = master
+[remote "origin"]
+[branch "master"]  
+	remote = origin  
+	merge = refs/heads/master
+[diff]
+	tool = vscode
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
+[merge]
+	tool = vscode
+[mergetool "vscode"]
+[alias]
+# see `git help log` for detailed help.
+# my awesome git log replacement
+lol = log -P -n5 --graph --pretty=format:'%C(yellow)%h%x09%Creset%C(cyan)%C(bold)%cd%Creset %C(green)%cn%Creset %C(green)%Creset %s' --date=default
+# using build-in standards
+lol2 = log -P -n5 --oneline --graph --decorate
+# shows branches and their last commits
+lol3 = log --all --graph --decorate --oneline --simplify-by-decoration
+# created ~/.aliases with alias gitnp="git --no-pager"
+
+:: [early notes]
+git config -l
+git config --global --edit
+git config --global init.defaultBranch master
+git config --global color.ui auto
+git config --global pull.rebase false
+echo .DS_Store >> ~/.gitignore_global
+git config --global core.excludesfile ~/.gitignore_global
+git config --global core.autocrlf false
+
+:: Adding or Staging Files
+git add . (stages new files and existing modified files, without deletions)
+git add -u (stages currently tracked files which have been modified and removes those since deleted)
+git add -A (performs both steps, that is, stages your entire directory as it is.)
+git commit -m "commit message"
+
+# Create New Repo (SSH)
+git init .
+echo "This is the ___ repo" >> readme.md
+git commit -m "initial commit"
+git remote add origin git@github.com:jacobsternx/projects.git
+git push -u origin master --force
+Note: after the above, can do git push
+git remote -vv    # very verbose
+
+# Clean Up Repo
+git reset --hard <commit>             # reset commit index
+git reflog expire --expire=all --all  # clear reflog
+git gc --prune=now                    # garbage collection
+
+# Discard uncomitted changes
+git reset --hard HEAD [Makes working directory and stage match the most recent commit (also called HEAD), effectively obliterating all tracked uncommitted changes.]
+git clean -d -f [Remove untracked files]
+
+:: Change password: 
+git config --global --unset user.password (Then run your git command to force creating new one)
+
+:: Configure Credential Caching ()
+https://techexpertise.medium.com/storing-git-credentials-with-git-credential-helper-33d22a6b5ce7
+git config --global credential.helper store
+The .git-credentials file stores token in plain text. Each credential is stored on its a line as a URL
+git config -l
+If needed, you can later clear the token from the local computer by running
+git config --global --unset credential.helper
+
+:: Configure local
+Once we have a token/key, we need to configure the local GIT client with a username and email address. 
+https://www.edgoad.com/2021/02/using-personal-access-tokens-with-git-and-github.html
+git config --global user.name "jacobsternx"
+git config --global user.email "75816278+jacobsternx@users.noreply.github.com"
+
+:: Using Personal Access Tokens
+When starting a new repo, the first REMOTE command should be git remote add origin git@github.com:username, if you run git remote set-url origin git@abc.com:mygit you will get error message: No such remote 'origin'.
+git remote add origin git@github.com:jacobsternx
+git remote set-url origin https://jacobsternx:<token-value>@github.com/jacobsternx/jd.git
+
+:: Using SSH
+Your git URL might have changed. Change the URL in the local directory by using the following command:
+for ssh protocol
+git remote set-url origin git@github.com:jacobsternx/odin.git
+
+:: Rename remote
+git remote set-url origin ssh://newhost.com/usr/local/gitroot/myproject.git
+
+:: Clone from GitHub
+git clone https://github.com/jacobsternx/jd.git (Token)
+git clone git@github.com:jacobsternx/repo-name.git (SSH)
+
+:: Revert latest commit
+  git revert HEAD
+revert the latest commit, skipping the commit message editor:
+  git revert HEAD --no-edit
+Revert last 2 commits
+  git revert HEAD~1
+
+:: Reset last commit
+  git reset --soft HEAD~1
+
+:: Change commit message (unpushed)
+git add .
+git commit --amend -m "New commit message."
+(pushed)
+git commit --amend m
+git commit --amend -m "New commit message."
+git push --force <remoteName> <branchName>
+(pushed older or multiple)
+git rebase -i HEAD~5
+:: must stage changes first
+
+:: Basic Git Operations
+git add -A stages all changes no matter where executed whether it be the subdirectory or the parent directory.
+git add -u stages modifications and deletions, without new files
+git add . stages new files and modifications, without deletions (on the current directory).
+git commit -m "commit message"
+git-secrets scans commits, commit messages, and --no-ff merges to prevent adding secrets into your git repositories. If a commit, commit message, or any commit in a --no-ff merge history matches one of your configured prohibited regular expression patterns, then the commit is rejected.
+
+:: fatal: The current branch master has no upstream branch
+https://stackoverflow.com/questions/23401652/fatal-the-current-branch-master-has-no-upstream-branch
+git push -u origin head
+If you are on any branch, this creates the branch of same name on the remote. 
+git config --global push.default current (then: git push, changes config)
+Always push a local branch to upstream. Default as usually no harm creating new branches upstream
+git branch 
+
+First use git pull origin your_branch_name Then use git push origin your_branch_name
+git pull --rebase git_url(Ex: https://github.com/username/reponame.git)
+git push origin master
+If it shows any fatal error regarding upstream after any future push then simply run:
+git push --set-upstream origin master
+:: Block command line pushes that expose my email: Solve it by modifying Git email
+   75816278+jacobsternx@users.noreply.github.com
+1. View current global user email: git config —global user.email
+2. Find GitHub recommended email: in setting Email –> Email under keep my email private 
+3. Reset global user email: git config --global user.email "75816278+jacobsternx@users.noreply.github.com"
+4. Reset last submitted author information git commit --amend --reset-author
+5. Resubmit git push --no-edit to avoid the editor
+(For GPG key use Seahorse)
+
+:: Git log
+git log shows commits, <SHA> is a git commit ID; 
+git log --stat shows stats about file names and line changes. 
+git log --oneline shows a condensed list of changes.
+git log --no-pager shows results with no pager
+git log --graph --all --decorate --oneline shows a concise graph
+git --no-pager log --graph --pretty=format:"%C(yellow)%h%x09%Creset%C(cyan)%C(bold)%cd%Creset %C(green)%cn%Creset %C(green)%Creset %s" --date=default
+
+:: Aliases 
+# .gitconfig
+[alias]
+# see `git help log` for detailed help.
+#   %h: abbreviated commit hash
+#   %d: ref names, like the --decorate option of git-log(1)
+#   %cn: commiter name
+#   %ce: committer email
+#   %cr: committer date, relative
+#   %ci: committer date, ISO 8601-like format
+#   %an: author name
+#   %ae: author email
+#   %ar: author date, relative
+#   %ai: author date, ISO 8601-like format
+#   %s: subject
+# my awesome git log replacement
+# note that git must be prepended, and -n # can optionally be appended
+lol = --no-pager log --graph --pretty=format:"%C(yellow)%h%x09%Creset%C(cyan)%C(bold)%cd%Creset %C(green)%cn%Creset %C(green)%Creset %s" --date=default
+# using build-in standards
+lol2 = --no-pager log --oneline --graph --decorate
+# shows branches and their last commits
+lol3 = --no-pager log --all --graph --decorate --oneline --simplify-by-decoration
+
+:: Intermediate Git
+git revert <SHA> Creates a new commit that’s the opposite (or inverse) of the given SHA
+git commit --amend or git commit --amend -m "commit message"
+Will update and replace the most recent commit with a new commit that combines any staged changes with the contents of the previous commit. With nothing currently staged, this just rewrites the previous commit message.
+git rebase -i <SHA> 
+merge
+reword
+rebase
+fixup
+squash
+pick
+autosquash
+
+:: To add files on specific branch ::
+List all local branches
+  git branch
+List all remote branches
+  git branch -r
+List all branches
+  git branch -a
+Detailed branch info
+  git branch -vv
+  git branch -vva
+To create custom branch
+  git branch branchname
+To switch into custom branch
+  git checkout branchname
+To initialize in the custom branch
+  git init
+To add files in the custom branch
+  git add file name
+To commit the changes made in the custom branch
+  git commit -m "your message"
+To make changes in your GitHub repo
+  git push
+
+:: Rename existing remote
+1. Confirm the name of your current remote:
+  git remote -v
+2. Change name of current remote repo named beanstalk, future name origin:
+  git remote rename beanstalk origin
+3.  Verify remote changed from “beanstalk” to “origin”:
+  git remote -v
+  origin https://somename.github.com/reponame.git (fetch)
+  origin https://somename.github.com/reponame.git (push)
+
+:: Rebase
+git fetch origin master
+git rebase origin/master
+If pushed unrebased branch onto master, must force push to reconcile
+git push -f origin af  (force)
+Note: do not rebase code if others are working on it. Pain to reconcile, will not match!
+If other local copies exist, others must backup and git reset --hard to commit to master.
+If something goes wrong:
+get rebase --abort
+Delete branch
+git branch -d branch-nam
+
+If you want to see the committer date (the date the commit was written with it's current ID):
+git log --format=%cd
+If you want to see the author date (the date the commit was originally written, but may differ from the committer date if the commit was amended, rebased, cherry-picked, etc, which caused it to get a new commit ID):
+git log --format=%ad
+
+:: Git Create SSH Private/Public key pair 
+Check if you already have a SSH keypair generated. Do the following:
+$ ls -la ~/.ssh/id_rsa*
+If the files exist, you already have SSH installed. IMPORTANT: But if you wish to regenerate the SSH key pair, at least back up your old SSH keys.
+$ cp ~/.ssh/id_rsa ~/.ssh/id_rsa.old  # Make a copy of the old SSH private key
+$ cp ~/.ssh/id_rsa.pub ~/.ssh/id_rsa.pub.old  # Make a copy of the old SSH public key
+BE CAREFUL when using your ~/.ssh/id_rsa file. This is your private key, guard it properly.
+
+:: Empty Folders
+Unofficially, for Git to recognize an empty directory, put a file named .gitkeep in it.
+copy nul > .gitkeep
+
+:: Terminology
+changeset : a commit, in version control; or set of changes along with metainformation, computed by git diff. 
+
+:: Generate a Personal Access Token:
+Log into GitHub
+Click on your name / Avatar in the upper right corner and select Settings
+On the left, click Developer settings
+Select Personal access tokens and click Generate new token
+Give the token a description/name and select the scope of the token
+Selected repo for pull, push, clone, and commit actions, and admin:repo_hook
+Click Generate token
+Copy the token – this is your new password!
+
+:: Future
+> git clean calls unlink(), and does not backup up anything beforehand.
+> It is always a good idea to double check with git clean -n beforehand.
+> Note for the future: If you don't want to lose your stashes each time you git stash pop, you can do git stash apply instead. It does the same thing, except it doesn't remove the reference to the applied stash.

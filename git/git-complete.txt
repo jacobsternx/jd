@@ -1,0 +1,77 @@
+github repos only have two types of URL addresses:
+An HTTPS URL like https://github.com/user/repo.git
+An SSH URL, like git@github.com:user/repo.git
+
+
+To add a new remote, use the git remote add command on the terminal from within your repository
+The git remote add command takes two arguments:
+
+A remote name, for example, origin
+A remote URL, for example, git@github.com:user/repo.git
+For example:
+
+$ git remote add origin git@github.com:user/repo.git
+# Set a new remote
+
+$ git remote -v
+# Verify new remote
+> origin  git@github.com:user/repo.git (fetch)
+> origin  git@github.com:user/repo.git (push)
+
+
+> fatal: remote origin already exists.
+This error means you've tried to add a remote with a name that already exists in your local repository.
+
+To fix this, you can:
+Use a different name for the new remote.
+Rename the existing remote repository before you add the new remote.
+Delete the existing remote repository before you add the new remote.
+
+
+
+Changing a remote repository's URL
+The git remote set-url command takes two arguments:
+An existing remote name. For example, origin or upstream are two common choices.
+
+
+
+Renaming a remote repository
+Use the git remote rename command to rename an existing remote.
+The git remote rename command takes two arguments:
+
+An existing remote name, for example, origin
+A new name for the remote, for example, upstream
+Example of renaming a remote repository
+
+$ git remote -v
+# View existing remotes
+> origin  git@github.com:user/repo.git (fetch)
+> origin  git@github.com:user/repo.git (push)
+$ git remote rename origin upstream
+$ git remote -v
+# Verify remote's new name
+
+Troubleshooting: Could not rename config section 'remote.[old name]' to 'remote.[new name]'
+This error means that the old remote name you typed doesn't exist.
+
+
+
+Removing a remote repository
+Use the git remote rm command to remove a remote URL from your repository.
+
+The git remote rm command takes one argument:
+A remote name, for example, origin
+Removing the remote URL from your repository only unlinks the local and remote repositories. 
+It does not delete the remote repository.
+
+$ git remote rm origin
+# Remove remote
+$ git remote -v
+# Verify it's gone
+> origin  https://github.com/OWNER/REPOSITORY.git (fetch)
+> origin  https://github.com/OWNER/REPOSITORY.git (push)
+Note: git remote rm does not delete the remote repository from the server. It simply removes the remote and its references from your local repository.
+
+Troubleshooting: Could not remove config section 'remote.[name]'
+This error means that the remote you tried to delete doesn't exist:
+

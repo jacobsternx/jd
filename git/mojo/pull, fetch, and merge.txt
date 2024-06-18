@@ -1,0 +1,27 @@
+Pull = fetch + merge: you should run fetch, then merge
+
+Generally, running git pull is like first running git fetch, then running git merge. But there are a lot of exceptions to this rule, and things can get very complicated. See my long answer to Git fetch and git pull relationship for much more about this. To avoid all the complications, especailly when you're new to Git, simply:
+
+    Run git fetch or git fetch origin: this obtains, from some other Git software working with some other Git repository, all the commits that they have, that you don't have yet. After the git fetch finishes, you now have all of their commits, plus any commits of your own that you have made.
+
+    (Optional.) Using the output from git fetch, or even ignoring the output of git fetch, use git log to inspect the new commits: the commits they have that you didn't, but do now.
+
+    For instance, in this particular case, you might run:
+
+    git log Pabasara..origin/dev
+
+    Run the second command of your choice: git merge or git rebase. Depending on how you configure git pull, you get to choose which second command git pull runs after it runs git fetch. But before you start doing that, just manually run the command you prefer here.
+
+You'll need to learn just what both git merge and git rebase do, including what to do when they fail partway through. This happens whether you run them yourself, manually, or have git pull run them. The recovery process is different for git merge vs git rebase, so you need to know which one git pull actually ran. If you run it yourself for now, you'll know.
+
+There's one thing that's especially weird here, that you just have to memorize.
+
+When you use git fetch, your Git calls up the other Git software over at origin and gets their commits, and then updates your remote-tracking names. Use git branch -r to see your remote-tracking names: they will look like origin/master or origin/main, origin/dev, and so on. That is, they all have origin/ in front of them. This is your Git's memory of their Git's branches (where by "your Git" I mean your software working in your repository, and by "their Git" I mean their software working in their repository ).
+
+To merge their latest dev into your Pabasara, then, you obviously need:
+
+git merge origin/dev
+
+which is the correct command to use here. Running git merge dev is wrong because it means to merge your dev; that's your dev and you want their dev here, as just updated by your earlier git fetch.
+
+But when you use git pull, you supply the name of their branch: git pull origin dev. So instead of origin/dev it's now origin dev, with a space. The reason why is one of those messy historical items I describe in my long answer to the linked question. This weirdness, where sometimes you use origin/dev and in one special case only (namely git pull) you use origin dev instead, is something you just have to memorize—or you can avoid git pull and now you don't have to memorize this!

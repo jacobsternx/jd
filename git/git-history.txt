@@ -1,0 +1,55 @@
+config --global user.email "75816278+jacobsternx@users.noreply.github.com"
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+git add origin
+git branch -a
+git branch -d master
+git branch -D master
+git branch -m master
+git checkout --orphan 2022
+git clean -xdf
+git clone https://github.com/jacobsternx/h3.git
+git commit --amend --reset-author
+git commit -m "update phpMyAdmin and Snap"
+git commit --no-edit
+git config --global core.editor nano
+git config --global credential.helper "cache --timeout=18000"
+git config --global credential.helper store
+git config --global --edit 
+git config --global init.defaultBranch master
+git config --global list
+git config --global --unset core.editor
+git config --global --unset credential.helper
+git config --global --unset user.password
+git config --global user.email "75816278+jacobsternx@users.noreply.github.com"
+git config --global user.email jacobsternx@gmail.com
+git config --global user.name "jacobsternx"
+git config --list
+git config --local core.editor nano
+git fetch
+git gc --aggressive --prune=all
+git log 
+git log --stat
+git ls
+git push -f origin master
+git push origin remote
+git push -u origin
+git push -u origin master
+git reflog
+git remote add origin git@github.com:jacobsternx
+git remote add origin https://github.com/jacobsternx/learning.git
+git remote set-url origin https://jacobsternx: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@github.com/jacobsternx/h3.git
+git remote set-url origin https://jacobsternx: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@github.com/jacobsternx/h3.git
+git remote show origin
+git reset --hard d5e50ad
+git reset --hard HEAD
+git reset --soft e47ff61
+git rm --cached Learn-SQL
+git rm -f --cached Learn-SQL
+git status
+git --version
+sudo git config --global user.email "jacobsternx@gmail.com"
+sudo git config --global user.name "jacobsternx"
+git merge master (this got my refs sorted so I could push to origin)
+Your branch and 'origin/master' have diverged, and have 1 and 2 different commits each, respectively. (use "git pull" to merge the remote branch into yours)
+git log --oneline
+touch .gitignore

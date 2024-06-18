@@ -1,0 +1,22 @@
+:: Create new GitHub repo on macOS CLI
+Install GitHub CLI (gh) using Homebreaw: 
+  brew install gh
+Authenticate gh (Attention To Detail)
+  gh auth login
+List GitHub repos
+  gh repo list
+Open terminal at empty root folder of project
+  git init -b master
+Add files to future repo
+  git add -A
+Commit to local repo
+  git commit -m "initial commit"
+From Create remote repo create (Attention To Detail)
+  gh create repo
+
+When prompted, select Push an existing local repository to GitHub and enter the desired name for your repository. If you want your project to belong to an organization instead of your user account, specify the organization name and project name with organization-name/project-name.
+
+Follow the interactive prompts. To add the remote and push the repository, confirm yes when asked to add the remote and push the commits to the current branch.
+
+Alternatively, to skip all the prompts, supply the path to the repository with the --source flag and pass a visibility flag (--public, --private, or --internal). For example, gh repo create --source=. --public. Specify a remote with the --remote flag. To push your commits, pass the --push flag. For more information about possible arguments, see the GitHub CLI manual.
+https://cli.github.com/manual/gh_repo_create
